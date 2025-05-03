@@ -26,8 +26,8 @@ Ly is a lightweight TUI (ncurses-like) display manager for Linux and BSD.
 git clone https://codeberg.org/AnErrupTion/ly
 cd ly
 git checkout v1.0.3
-cd ..
 
+cd ..
 git clone https://github.com/tywil04/ly-copr
 
 
