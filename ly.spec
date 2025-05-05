@@ -5,7 +5,7 @@
 
 
 Name:          ly
-Version:       v1.0.3
+Version:       1.0.3
 Release:       2%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
