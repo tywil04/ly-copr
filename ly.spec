@@ -9,7 +9,7 @@
 
 Name:          ly
 Version:       1.0.3
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -52,10 +52,12 @@ mkdir -p %{buildroot}/usr/bin/
 mkdir -p %{buildroot}/usr/lib/systemd/system/
 mkdir -p %{buildroot}/etc/pam.d/
 mkdir -p %{buildroot}/usr/share/selinux/packages
+mkdir -p %{buildroot}/lib/ly
 
 cd ly
-zig build installexe -Ddest_directory=%{buildroot}
+zig build installnoconf -Ddest_directory=%{buildroot}
 cp res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
+cp res/config.ini %{buildroot}/lib/ly
 
 cd ../ly-copr/selinux 
 cp ly.pp %{buildroot}/usr/share/selinux/packages
@@ -105,7 +107,7 @@ fi;
 /etc/ly/lang/uk.ini
 /etc/ly/xsetup.sh
 /etc/ly/wsetup.sh
-/etc/ly/config.ini
+/lib/ly/config.ini
 /etc/pam.d/ly
 /usr/share/selinux/packages/ly.pp
 /usr/lib/systemd/system-preset/99-ly.preset
