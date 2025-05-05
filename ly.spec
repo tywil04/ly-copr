@@ -108,4 +108,4 @@ fi;
 /etc/ly/config.ini
 /etc/pam.d/ly
 /usr/share/selinux/packages/ly.pp
-/usr/lib/systemd/system-preset/99-ly.preset
+%{buildroot}%{_presetdir}/99-ly.preset
