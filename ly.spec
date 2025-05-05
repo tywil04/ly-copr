@@ -4,9 +4,6 @@
 %define relabel_files() restorecon -R /usr/bin/ly; 
 
 
-%systemd_requires
-
-
 Name:          ly
 Version:       1.0.3
 Release:       2%{?dist}
