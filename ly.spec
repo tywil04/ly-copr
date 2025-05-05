@@ -4,9 +4,12 @@
 %define relabel_files() restorecon -R /usr/bin/ly; 
 
 
+%systemd_requires
+
+
 Name:          ly
 Version:       1.0.3
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -19,6 +22,7 @@ BuildRequires: zig
 BuildRequires: selinux-policy-devel
 Requires:      libxcb
 Requires:      pam
+Requires:      systemd
 
 
 %description
@@ -63,12 +67,18 @@ if /usr/sbin/selinuxenabled ; then
     /usr/sbin/load_policy
     %relabel_files
 fi;
+%systemd_post ly.service
+
+
+%preun
+%systemd_preun ly.service
 
 
 %postun
 if [ $1 -eq 0 ]; then
     semodule -n -r ly
 fi;
+%systemd_postun_with_restart ly.service
 
 
 %files
