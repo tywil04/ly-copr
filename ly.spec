@@ -61,7 +61,7 @@ cd ../ly-copr/selinux
 cp ly.pp %{buildroot}/usr/share/selinux/packages
 
 cd ../systemd
-%{__install} -Dm644 ly.preset %{buildroot}%{_presetdir}/99-ly.preset
+%{__install} -Dm644 ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
 
 
 %post
@@ -108,4 +108,4 @@ fi;
 /etc/ly/config.ini
 /etc/pam.d/ly
 /usr/share/selinux/packages/ly.pp
-%{buildroot}%{_presetdir}/99-ly.preset
+/usr/lib/systemd/system-preset/99-ly.preset
