@@ -4,6 +4,9 @@
 %define relabel_files() restorecon -R /usr/bin/ly; 
 
 
+%{?systemd_requires}
+
+
 Name:          ly
 Version:       1.0.3
 Release:       3%{?dist}
@@ -56,6 +59,9 @@ cp res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do t
 
 cd ../ly-copr/selinux 
 cp ly.pp %{buildroot}/usr/share/selinux/packages
+
+cd ../systemd
+%{__install} -Dm644 ly.preset %{buildroot}%{_presetdir}/99-ly.preset
 
 
 %post
