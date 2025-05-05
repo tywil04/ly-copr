@@ -5,8 +5,8 @@
 
 
 Name:          ly
-Version:       {{{ git_dir_version }}}
-Release:       v1.0.3
+Version:       v1.0.3
+Release:       1%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
