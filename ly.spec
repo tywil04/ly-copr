@@ -1,9 +1,12 @@
+%global srcname ly
+        
+    
 %define relabel_files() restorecon -R /usr/bin/ly; 
 
 
 Name:          ly
-Version:       v1.0.3
-Release:       0%\{?dist}
+Version:       {{{ git_dir_version }}}
+Release:       v1.0.3
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -23,7 +26,7 @@ Ly is a lightweight TUI (ncurses-like) display manager for Linux and BSD.
 
 
 %prep
-git clone https://codeberg.org/AnErrupTion/ly
+git clone https://github.com/fairyglade/ly # https://codeberg.org/AnErrupTion/ly
 cd ly
 git checkout v1.0.3
 
