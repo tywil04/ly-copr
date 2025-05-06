@@ -13,6 +13,7 @@ Release:       5%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
+BuildRequires: kernel-devel
 BuildRequires: pam-devel
 BuildRequires: libxcb-devel
 BuildRequires: git
@@ -40,7 +41,7 @@ git clone https://github.com/tywil04/ly-copr
 
 %build
 cd ly
-zig build installnoconf -Ddest_directory=./build -Dtarget="x86_64-linux-gnu"
+zig build installnoconf -Ddest_directory=./build -Dcpu=x86_64
 
 cd ../ly-copr/selinux
 make -f /usr/share/selinux/devel/Makefile ly.pp
