@@ -40,7 +40,7 @@ git clone https://github.com/tywil04/ly-copr
 
 %build
 cd ly
-zig build
+zig build installnoconf -Ddest_directory=./build -Dtarget="x86_64-linux-gnu"
 
 cd ../ly-copr/selinux
 make -f /usr/share/selinux/devel/Makefile ly.pp
@@ -55,7 +55,7 @@ mkdir -p %{buildroot}/usr/share/selinux/packages
 mkdir -p %{buildroot}/lib/ly
 
 cd ly
-zig build installnoconf -Ddest_directory=%{buildroot}
+cp -r build/* %{buildroot}
 cp res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
 cp res/config.ini %{buildroot}/lib/ly
 
