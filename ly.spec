@@ -59,7 +59,7 @@ cd ../ly-copr/selinux
 cp ly.pp %{buildroot}/usr/share/selinux/packages
 
 cd ../systemd
-cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
+cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/zz-ly.preset
 
 
 %post
