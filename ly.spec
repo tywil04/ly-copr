@@ -3,7 +3,7 @@
 
 Name:          ly
 Version:       1.0.3
-Release:       9%{?dist}
+Release:       10%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -64,18 +64,10 @@ cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
 
 %post
 semodule -n -i /usr/share/selinux/packages/ly.pp
-/usr/sbin/load_policy
+load_policy
 restorecon -R /usr/bin/ly; 
 
-systemctl daemon-reload
-systemctl enable ly.service
-
-
-%preun
-if [ $1 -eq 0 ]; then
-    systemctl stop ly.service
-    systemctl disable ly.service
-fi
+systemctl preset ly.service
 
 
 %files
