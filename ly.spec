@@ -9,7 +9,7 @@
 
 Name:          ly
 Version:       1.0.3
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
