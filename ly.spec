@@ -3,7 +3,7 @@
 
 Name:          ly
 Version:       1.0.3
-Release:       11%{?dist}
+Release:       12%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -59,7 +59,7 @@ cd ../ly-copr/selinux
 cp ly.pp %{buildroot}/usr/share/selinux/packages
 
 cd ../systemd
-cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/999-ly.preset
+cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
 
 
 %post
