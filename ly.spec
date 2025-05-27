@@ -6,7 +6,7 @@
 
 Name:          ly
 Version:       1.0.3
-Release:       6%{?dist}
+Release:       7%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -45,23 +45,24 @@ make -f /usr/share/selinux/devel/Makefile ly.pp
 
 
 %install
-# mkdir -p %{buildroot}/etc/
-# mkdir -p %{buildroot}/usr/bin/
-# mkdir -p %{buildroot}/usr/lib/systemd/system/
-# mkdir -p %{buildroot}/etc/pam.d/
-# mkdir -p %{buildroot}/usr/share/selinux/packages
-# mkdir -p %{buildroot}/lib/ly
+mkdir -p %{buildroot}/etc/
+mkdir -p %{buildroot}/usr/bin/
+mkdir -p %{buildroot}/usr/lib/systemd/system/
+mkdir -p %{buildroot}/etc/pam.d/
+mkdir -p %{buildroot}/usr/share/selinux/packages
+mkdir -p %{buildroot}/lib/ly
+mkdir -p %{buildroot}/usr/lib/systemd/system-preset
 
 cd ly
-%{__install} -Dm644 -r build/* %{buildroot}
-%{__install} -Dm644 res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
-%{__install} -Dm644 res/config.ini %{buildroot}/lib/ly
+cp -r build/* %{buildroot}
+cp res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
+cp res/config.ini %{buildroot}/lib/ly
 
 cd ../ly-copr/selinux 
-%{__install} -Dm644 ly.pp %{buildroot}/usr/share/selinux/packages
+cp ly.pp %{buildroot}/usr/share/selinux/packages
 
 cd ../systemd
-%{__install} -Dm644 ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
+cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
 
 
 %post
