@@ -1,12 +1,9 @@
 %global srcname ly
         
 
-%{?systemd_requires}
-
-
 Name:          ly
 Version:       1.0.3
-Release:       8%{?dist}
+Release:       9%{?dist}
 Summary:       A TUI display manager
 License:       WTFPL
 URL:           https://codeberg.org/AnErrupTion/ly
@@ -69,18 +66,16 @@ cp ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
 semodule -n -i /usr/share/selinux/packages/ly.pp
 /usr/sbin/load_policy
 restorecon -R /usr/bin/ly; 
-%systemd_post ly.service
+
+systemctl daemon-reload
+systemctl enable ly.service
 
 
 %preun
-%systemd_preun ly.service
-
-
-%postun
 if [ $1 -eq 0 ]; then
-    semodule -n -r ly
-fi;
-%systemd_postun_with_restart ly.service
+    systemctl stop ly.service
+    systemctl disable ly.service
+fi
 
 
 %files
