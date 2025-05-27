@@ -1,8 +1,5 @@
 %global srcname ly
         
-    
-%define relabel_files() restorecon -R /usr/bin/ly; 
-
 
 %{?systemd_requires}
 
@@ -48,20 +45,20 @@ make -f /usr/share/selinux/devel/Makefile ly.pp
 
 
 %install
-mkdir -p %{buildroot}/etc/
-mkdir -p %{buildroot}/usr/bin/
-mkdir -p %{buildroot}/usr/lib/systemd/system/
-mkdir -p %{buildroot}/etc/pam.d/
-mkdir -p %{buildroot}/usr/share/selinux/packages
-mkdir -p %{buildroot}/lib/ly
+# mkdir -p %{buildroot}/etc/
+# mkdir -p %{buildroot}/usr/bin/
+# mkdir -p %{buildroot}/usr/lib/systemd/system/
+# mkdir -p %{buildroot}/etc/pam.d/
+# mkdir -p %{buildroot}/usr/share/selinux/packages
+# mkdir -p %{buildroot}/lib/ly
 
 cd ly
-cp -r build/* %{buildroot}
-cp res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
-cp res/config.ini %{buildroot}/lib/ly
+%{__install} -Dm644 -r build/* %{buildroot}
+%{__install} -Dm644 res/ly.service %{buildroot}/usr/lib/systemd/system # I shouldn't have to do this, but with a custom dest_directoy I need to for some reason
+%{__install} -Dm644 res/config.ini %{buildroot}/lib/ly
 
 cd ../ly-copr/selinux 
-cp ly.pp %{buildroot}/usr/share/selinux/packages
+%{__install} -Dm644 ly.pp %{buildroot}/usr/share/selinux/packages
 
 cd ../systemd
 %{__install} -Dm644 ly.preset %{buildroot}/usr/lib/systemd/system-preset/99-ly.preset
@@ -69,10 +66,8 @@ cd ../systemd
 
 %post
 semodule -n -i /usr/share/selinux/packages/ly.pp
-if /usr/sbin/selinuxenabled ; then
-    /usr/sbin/load_policy
-    %relabel_files
-fi;
+/usr/sbin/load_policy
+restorecon -R /usr/bin/ly; 
 %systemd_post ly.service
 
 
